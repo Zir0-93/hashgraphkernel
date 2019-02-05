@@ -47,7 +47,7 @@ def analyze(dataset):
 
         # Compute gram matrix for HGK-SP
         # 20 is the number of iterations
-        gram_matrix = rbk.hash_graph_kernel(graph_db, wl.weisfeiler_lehman_subtree_kernel, kernel_parameters_wl, 1, scale_attributes=True, lsh_bin_width=1.0, sigma=1.0)
+        gram_matrix = rbk.hash_graph_kernel(graph_db, wl.weisfeiler_lehman_subtree_kernel, kernel_parameters_wl, 10, scale_attributes=True, lsh_bin_width=1.0, sigma=1.0)
 
         # Normalize gram matrix
         gram_matrix = aux.normalize_gram_matrix(gram_matrix)
