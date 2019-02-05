@@ -14,27 +14,6 @@ import traceback
 import random
 import multiprocessing
 
-
-def main():
-    repos = ['ALL', 'APACHE', 'FACEBOOK', 'GOOGLE', 'MICROSOFT', 'NETFLIX', 'SPRING-PROJECTS', 'SQUARE']
-    types = ['GENERAL', 'SPECIFIC']
-    threads = 5   # Number of threads to create
-    for repo in repos:
-        for type in types:
-            jobs = []
-            for i in range(5, 10):
-                out_list = list()
-                process = multiprocessing.Process(target=process,
-			                              args=('DIFFS_' + repo + '_' + str(i) + '_' + type))
-		jobs.append(process)
-            # Start the threads (i.e. calculate the random number lists)
-            for j in jobs:
-                j.start()
-            # Ensure all of the threads have finished
-            for j in jobs:
-                j.join()
-            
-            
 def process(dataset):
     try:
         print "Processing dataset: " + dataset
@@ -78,6 +57,29 @@ def process(dataset):
         dp.write_lib_svm(gram_matrix, classes, dataset + "_gram_matrix", end - start)
     except Exception as e:
         traceback.print_exc()
+
+
+def main():
+    repos = ['ALL', 'APACHE', 'FACEBOOK', 'GOOGLE', 'MICROSOFT', 'NETFLIX', 'SPRING-PROJECTS', 'SQUARE']
+    types = ['GENERAL', 'SPECIFIC']
+    threads = 5   # Number of threads to create
+    for repo in repos:
+        for type in types:
+            jobs = []
+            for i in range(5, 10):
+                out_list = list()
+                process = multiprocessing.Process(target=process,
+			                              args=('DIFFS_' + repo + '_' + str(i) + '_' + type))
+		jobs.append(process)
+            # Start the threads (i.e. calculate the random number lists)
+            for j in jobs:
+                j.start()
+            # Ensure all of the threads have finished
+            for j in jobs:
+                j.join()
+            
+            
+
     
 if __name__ == "__main__":
     main()
