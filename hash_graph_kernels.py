@@ -39,7 +39,7 @@ def process(dataset):
         print "Processing dataset: " + dataset
         start = time.time()
         # Load ENZYMES data set
-        graph_db, classes = dp.read_txt('datasets/' + dataset)
+        graph_db, classes = dp.read_txt(dataset)
 
         # Parameters used: 
         # Compute gram matrix: False, 
