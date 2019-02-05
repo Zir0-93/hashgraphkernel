@@ -57,6 +57,7 @@ def process(dataset):
         dp.write_lib_svm(gram_matrix, classes, dataset + "_gram_matrix", end - start)
     except Exception as e:
         traceback.print_exc()
+    return True
 
 
 def main():
@@ -68,8 +69,8 @@ def main():
             jobs = []
             for i in range(5, 10):
                 out_list = list()
-                process = multiprocessing.Process(target=process,
-			                              args=('DIFFS_' + repo + '_' + str(i) + '_' + type))
+                process = multiprocessing.Process(target=process(),
+			                          args=('DIFFS_' + repo + '_' + str(i) + '_' + type))
 		jobs.append(process)
             # Start the threads (i.e. calculate the random number lists)
             for j in jobs:
