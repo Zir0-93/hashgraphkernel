@@ -161,7 +161,7 @@ def write_lib_svm(gram_matrix, classes, name, exec_time):
                        {'kernel':['poly'], 'degree':[2,3]}]
 
     clf = GridSearchCV(SVC(class_weight='balanced'), tuned_parameters, cv=10, scoring="f1_weighted", n_jobs=-1)
-    clf.fit(X_train, y_train, average=None)
+    clf.fit(X_train, y_train)
 
     report_str="Detailed classification report:\n\n"
     report_str += ("The model is trained on the full development set.\n")
