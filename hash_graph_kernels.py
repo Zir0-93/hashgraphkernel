@@ -77,7 +77,6 @@ def process(dataset):
         dp.write_lib_svm(gram_matrix, classes, dataset + "_gram_matrix", end - start)
     except Exception as e:
         traceback.print_exc()
-        continue
     
 if __name__ == "__main__":
     main()
