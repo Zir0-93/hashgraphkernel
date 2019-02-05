@@ -60,27 +60,14 @@ def analyze(dataset):
 
 
 def main():
-    repos = ['FACEBOOK', 'GOOGLE', 'NETFLIX',  'MICROSOFT', 'APACHE', 'SPRING-PROJECTS', 'SQUARE', 'ALL']
+    repos = ['GOOGLE', 'NETFLIX',  'MICROSOFT', 'APACHE', 'SPRING-PROJECTS', 'SQUARE', 'ALL']
     types = ['GENERAL', 'SPECIFIC']
     threads = 5   # Number of threads to create
     for repo in repos:
         for type in types:
             jobs = []
             for i in range(5, 10):
-                out_list = list()
-		dataset_name = 'DIFFS_' + repo + '_' + str(i) + '_' + type
-                analysis = multiprocessing.Process(
-			target=analyze,
-			args=(dataset_name,)
-		)
-		jobs.append(analysis)
-            # Start the threads (i.e. calculate the random number lists)
-            for j in jobs:
-                j.start()
-            # Ensure all of the threads have finished
-            for j in jobs:
-                j.join()
-            
+                analyze(dataset_name)       
             
 
     
