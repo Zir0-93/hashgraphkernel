@@ -1,4 +1,4 @@
-# Copyright (c) 2017 by Christopher Morris
+# Copyright (c) 2017 by Christopher MorrisALL
 # Web site: https://ls11-www.cs.uni-dortmund.de/staff/morris
 # Email: christopher.morris at udo.edu
 
@@ -10,14 +10,15 @@ from graphkernel import wl_kernel as wl
 import time
 import sys
 import os
-
+import traceback
 
 def main():
     for dataset in os.listdir('datasets/'):
         try:
+            print "Processing dataset: " + dataset
             start = time.time()
             # Load ENZYMES data set
-            graph_db, classes = dp.read_txt(dataset)
+            graph_db, classes = dp.read_txt('DIFFS_ALL_8_GENERAL')
 
             # Parameters used: 
             # Compute gram matrix: False, 
