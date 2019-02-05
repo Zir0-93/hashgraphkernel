@@ -72,7 +72,7 @@ def main():
 		dataset_name = 'DIFFS_' + repo + '_' + str(i) + '_' + type
                 analysis = multiprocessing.Process(
 			target=analyze,
-			args=(dataset_name)
+			args=(str(dataset_name))
 		)
 		jobs.append(analysis)
             # Start the threads (i.e. calculate the random number lists)
