@@ -24,6 +24,7 @@ def main():
             jobs = []
             for i in range(5, 10):
                 out_list = list()
+                print "Adding new job dataset "  + 'DIFFS_' + repo + '_' + str(i) + '_' + type
                 thread = threading.Thread(target=process('DIFFS_' + repo + '_' + str(i) + '_' + type))
                 jobs.append(thread)
             # Start the threads (i.e. calculate the random number lists)
