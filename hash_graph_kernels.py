@@ -36,7 +36,7 @@ def analyze(dataset):
 
         # Use discrete labels, too
         kernel_parameters_sp = [False, False, 1]
-        kernel_parameters_wl = [3, False, False, 20]
+        kernel_parameters_wl = [100, False, True, 1]
 
 
         # Compute gram matrix for HGK-WL
