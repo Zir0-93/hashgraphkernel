@@ -68,9 +68,10 @@ def main():
             jobs = []
             for i in range(5, 10):
                 out_list = list()
+		dataset_name = 'DIFFS_' + repo + '_' + str(i) + '_' + type
                 analysis = multiprocessing.Process(
 			target=analyze,
-			args=('DIFFS_' + repo + '_' + str(i) + '_' + type)
+			args=(dataset_name)
 		)
 		jobs.append(analysis)
             # Start the threads (i.e. calculate the random number lists)
