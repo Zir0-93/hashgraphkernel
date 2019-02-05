@@ -26,7 +26,7 @@ def main():
                 out_list = list()
                 process = multiprocessing.Process(target=process,
 			                              args=('DIFFS_' + repo + '_' + str(i) + '_' + type))
-		        jobs.append(process)
+		jobs.append(process)
             # Start the threads (i.e. calculate the random number lists)
             for j in jobs:
                 j.start()
