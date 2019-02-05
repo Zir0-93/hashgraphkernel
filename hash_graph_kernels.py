@@ -14,8 +14,7 @@ import traceback
 import random
 import multiprocessing
 
-def analyze(*arg):
-    print arg
+def analyze(dataset):
     try:
         print "Processing dataset: " + dataset
         start = time.time()
@@ -72,7 +71,7 @@ def main():
 		dataset_name = 'DIFFS_' + repo + '_' + str(i) + '_' + type
                 analysis = multiprocessing.Process(
 			target=analyze,
-			args=(str(dataset_name))
+			args=(dataset_name,)
 		)
 		jobs.append(analysis)
             # Start the threads (i.e. calculate the random number lists)
