@@ -14,7 +14,8 @@ import traceback
 import random
 import multiprocessing
 
-def analyze(dataset):
+def analyze(*arg):
+    print arg
     try:
         print "Processing dataset: " + dataset
         start = time.time()
