@@ -67,7 +67,7 @@ def main():
         for type in types:
             jobs = []
             for i in range(5, 10):
-                analyze(dataset_name)       
+                analyze('DIFFS_' + repo + '_' + str(i) + '_' + type)       
             
 
     
