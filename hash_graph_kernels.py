@@ -11,52 +11,73 @@ import time
 import sys
 import os
 import traceback
+import random
+import threading
+
 
 def main():
-    for dataset in os.listdir('datasets/'):
-        try:
-            print "Processing dataset: " + dataset
-            start = time.time()
-            # Load ENZYMES data set
-            graph_db, classes = dp.read_txt('DIFFS_ALL_8_GENERAL')
+    repos = ['ALL', 'APACHE', 'FACEBOOK', 'GOOGLE', 'MICROSOFT', 'NETFLIX', 'SPRING-PROJECTS', 'SQUARE']
+    types = ['GENERAL', 'SPECIFIC']
+    threads = 5   # Number of threads to create
+    for repo in repos:
+        for type in types:
+            jobs = []
+            for i in range(5, 10):
+                out_list = list()
+                thread = threading.Thread(target=process('DIFFS_' + repo + '_' + str(i) + '_' + type))
+                jobs.append(thread)
+            # Start the threads (i.e. calculate the random number lists)
+            for j in jobs:
+                j.start()
+            # Ensure all of the threads have finished
+            for j in jobs:
+                j.join()
+            
+            
+def process(dataset):
+    try:
+        print "Processing dataset: " + dataset
+        start = time.time()
+        # Load ENZYMES data set
+        graph_db, classes = dp.read_txt('datasets/' + dataset)
 
-            # Parameters used: 
-            # Compute gram matrix: False, 
-            # Normalize gram matrix: False
-            # Use discrete labels: False
-            #kernel_parameters_sp = [False, False, 0]
+        # Parameters used: 
+        # Compute gram matrix: False, 
+        # Normalize gram matrix: False
+        # Use discrete labels: False
+        #kernel_parameters_sp = [False, False, 0]
 
-            # Parameters used: 
-            # Compute gram matrix: False, 
-            # Normalize gram matrix: False
-            # Use discrete labels: False
-            # Number of iterations for WL: 3
-            #kernel_parameters_wl = [3, False, False, 0]
+        # Parameters used: 
+        # Compute gram matrix: False, 
+        # Normalize gram matrix: False
+        # Use discrete labels: False
+        # Number of iterations for WL: 3
+        #kernel_parameters_wl = [3, False, False, 0]
 
-            # Use discrete labels, too
-            kernel_parameters_sp = [False, False, 1]
-            kernel_parameters_wl = [3, False, False, 20]
+        # Use discrete labels, too
+        kernel_parameters_sp = [False, False, 1]
+        kernel_parameters_wl = [3, False, False, 20]
 
 
-            # Compute gram matrix for HGK-WL
-            # 20 is the number of iterations
-            #gram_matrix = rbk.hash_graph_kernel(graph_db, sp_exp.shortest_path_kernel, kernel_parameters_sp, 100, scale_attributes=True, lsh_bin_width=1.0, sigma=1.0)
-            # Normalize gram matrix
-            #gram_matrix = aux.normalize_gram_matrix(gram_matrix)
+        # Compute gram matrix for HGK-WL
+        # 20 is the number of iterations
+        #gram_matrix = rbk.hash_graph_kernel(graph_db, sp_exp.shortest_path_kernel, kernel_parameters_sp, 100, scale_attributes=True, lsh_bin_width=1.0, sigma=1.0)
+        # Normalize gram matrix
+        #gram_matrix = aux.normalize_gram_matrix(gram_matrix)
 
-            # Compute gram matrix for HGK-SP
-            # 20 is the number of iterations
-            gram_matrix = rbk.hash_graph_kernel(graph_db, wl.weisfeiler_lehman_subtree_kernel, kernel_parameters_wl, 1, scale_attributes=True, lsh_bin_width=1.0, sigma=1.0)
+        # Compute gram matrix for HGK-SP
+        # 20 is the number of iterations
+        gram_matrix = rbk.hash_graph_kernel(graph_db, wl.weisfeiler_lehman_subtree_kernel, kernel_parameters_wl, 1, scale_attributes=True, lsh_bin_width=1.0, sigma=1.0)
 
-            # Normalize gram matrix
-            gram_matrix = aux.normalize_gram_matrix(gram_matrix)
+        # Normalize gram matrix
+        gram_matrix = aux.normalize_gram_matrix(gram_matrix)
 
-            end = time.time()
-            # Write out LIBSVM matrix
-            dp.write_lib_svm(gram_matrix, classes, dataset + "_gram_matrix", end - start)
-        except Exception as e:
-            traceback.print_exc()
-            continue
-
+        end = time.time()
+        # Write out LIBSVM matrix
+        dp.write_lib_svm(gram_matrix, classes, dataset + "_gram_matrix", end - start)
+    except Exception as e:
+        traceback.print_exc()
+        continue
+    
 if __name__ == "__main__":
     main()
