@@ -58,9 +58,8 @@ def analyze(dataset):
     except Exception as e:
         traceback.print_exc()
 
-
 def main():
-    repos = ['GOOGLE', 'NETFLIX',  'MICROSOFT', 'SQUARE', 'SPRING-PROJECTS', 'APACHE', 'ALL']
+    repos = ['MICROSOFT', 'GOOGLE', 'NETFLIX', 'SQUARE', 'SPRING-PROJECTS', 'APACHE', 'ALL']
     types = ['GENERAL', 'SPECIFIC']
     threads = 5   # Number of threads to create
     for repo in repos:
