@@ -60,7 +60,7 @@ def analyze(dataset):
 
 
 def main():
-    repos = ['ALL', 'APACHE', 'FACEBOOK', 'GOOGLE', 'MICROSOFT', 'NETFLIX', 'SPRING-PROJECTS', 'SQUARE']
+    repos = ['FACEBOOK', 'GOOGLE', 'NETFLIX',  'MICROSOFT', 'APACHE', 'SPRING-PROJECTS', 'SQUARE', 'ALL']
     types = ['GENERAL', 'SPECIFIC']
     threads = 5   # Number of threads to create
     for repo in repos:
