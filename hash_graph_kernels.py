@@ -12,7 +12,7 @@ import sys
 import os
 import traceback
 import random
-import threading
+import multiprocessing
 
 
 def main():
@@ -24,9 +24,9 @@ def main():
             jobs = []
             for i in range(5, 10):
                 out_list = list()
-                print "Adding new job dataset "  + 'DIFFS_' + repo + '_' + str(i) + '_' + type
-                thread = threading.Thread(target=process('DIFFS_' + repo + '_' + str(i) + '_' + type))
-                jobs.append(thread)
+                process = multiprocessing.Process(target=process,
+			                              args=('DIFFS_' + repo + '_' + str(i) + '_' + type))
+		        jobs.append(process)
             # Start the threads (i.e. calculate the random number lists)
             for j in jobs:
                 j.start()
