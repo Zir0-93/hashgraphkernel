@@ -59,16 +59,13 @@ def analyze(dataset):
         traceback.print_exc()
 
 def main():
-    repos = ['MICROSOFT', 'GOOGLE', 'NETFLIX', 'SQUARE', 'SPRING-PROJECTS', 'APACHE', 'ALL']
-    types = ['GENERAL', 'SPECIFIC']
-    threads = 5   # Number of threads to create
+    #repos = ['MICROSOFT', 'GOOGLE', 'NETFLIX', 'SQUARE', 'SPRING-PROJECTS', 'APACHE', 'ALL']
+    repos = ['ALL']
+    types = ['GENERAL']#,'SPECIFIC']
     for repo in repos:
         for type in types:
-            jobs = []
-            for i in range(5, 10):
+            for i in range(5, 6):
                 analyze('DIFFS_' + repo + '_' + str(i) + '_' + type)       
-            
 
-    
 if __name__ == "__main__":
     main()
