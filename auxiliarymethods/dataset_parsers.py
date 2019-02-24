@@ -135,7 +135,7 @@ def read_txt(ds_name):
     
     for index, graph in enumerate(graph_db):
         if classes[index] != 0:
-            positive_classes.append(graph)
+            positive_graphs.append(graph)
             positive_labels.append(classes[index])
     
     for index, graph in enumerate(graph_db):
